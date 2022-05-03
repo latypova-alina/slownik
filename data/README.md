@@ -1,4 +1,4 @@
-#Data
+# Data
 
 The `data` folder consists of a script for cleaning the original dictionary and resources which will be produced in a result of clearing the vocabulary.
 
