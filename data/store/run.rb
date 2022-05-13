@@ -1,5 +1,8 @@
 require_relative "set_up.rb"
 require_relative "sort.rb"
+require 'aws-sdk-dynamodb'
+require 'dotenv/load'
+require "google/cloud/translate/v2"
 require_relative "translate.rb"
 require_relative "giphy.rb"
 
@@ -21,7 +24,7 @@ start = Time.now
 i=0
 
 File.foreach(TEST_WORDS_FILE).each_slice(200) do |slice|
-  if i <= 30
+  if i <= 810
     i+=1
     next
   end
@@ -44,6 +47,10 @@ File.foreach(TEST_WORDS_FILE).each_slice(200) do |slice|
   threads.each(&:join)
 end
 
-binding.pry
+dynamodb.count
+finish = Time.now
 
-#162468
+puts finish-start
+#162599 - records
+#326345 - translate requests
+#разница в 163746

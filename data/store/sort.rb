@@ -1,3 +1,6 @@
+require "httparty"
+require "pry"
+require "nokogiri"
 require "open-uri"
 require "facets/string/squish"
 
