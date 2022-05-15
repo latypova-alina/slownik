@@ -1,8 +1,8 @@
 require "interactor"
-require_relative "giphy"
-require_relative "translate"
-require_relative "unite"
-require_relative "word_forms/word_forms"
+require "./lib/store_words/interactors/giphy"
+require "./lib/store_words/interactors/translate"
+require "./lib/store_words/interactors/unite"
+require "./lib/store_words/interactors/word_forms/word_forms"
 
 class WordDescription
   include Interactor::Organizer

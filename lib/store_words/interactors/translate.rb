@@ -1,5 +1,6 @@
-require_relative "../lib/response_getter"
+require "./lib/response_getter"
 require "active_support/core_ext/module"
+require "google/cloud/translate/v2"
 
 class Translate
   include Interactor

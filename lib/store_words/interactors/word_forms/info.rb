@@ -1,4 +1,4 @@
-require_relative "../../lib/response_getter"
+require "./lib/response_getter"
 require "active_support/core_ext/module"
 require "nokogiri"
 require "open-uri"
@@ -13,6 +13,8 @@ module WordForms
     delegate :word, :is_verb, :word_forms_array, to: :context
 
     def call
+      context.word_forms_array = []
+
       get_response do
         WORD_TYPES.each do |type|
           @response = Nokogiri::HTML(open("#{URL}/#{type}/#{URI.encode(word)}"))
@@ -30,7 +32,7 @@ module WordForms
 
 
     def word_forms_array
-      return [] unless @response
+      return unless @response
 
       context.word_forms_array = @response.css(TAG).map{ |n| n.children.text }
     end

@@ -1,4 +1,4 @@
-require_relative "../lib/response_getter"
+require "./lib/response_getter"
 require "active_support/core_ext/module"
 require "httparty"
 require 'dotenv/load'
@@ -21,7 +21,6 @@ class Giphy
     } }
 
     context.gifs = get_response do
-      binding.pry
       response = self.class.get("/v1/gifs/search", options)
 
       response["data"].map{ |gif| gif["url"] }
