@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+require "./lib/store_words/interactors/word_description"
+require "./lib/dynamoDB"
+require "interactor"
+require "aws-sdk-dynamodb"
+require "pry"
+
+TEST_WORDS_FILE = "./lib/resources/cleared_words.txt".freeze
+THREADS_AMOUNT = 200.freeze
+SKIP_TRANSLATE_REQUESTS = 163746.freeze
+INACCURACY = 8.freeze
+
+def run(offset, dynamodb, threads = [], i = 0)
+  File.foreach(TEST_WORDS_FILE).each_slice(THREADS_AMOUNT) do |slice|
+    i += 1; next if i <= offset
+
+    slice.each do |line|
+      threads << Thread.new do
+        word = line.strip
+
+        word_description = WordDescription.call(word: word)
+        Thread.exit if word_description.failure?
+
+        puts word
+
+        dynamodb.put_item({
+          table_name: 'Slownik',
+          item: word_description.result
+        })
+      end
+    end
+    threads.each(&:join)
+  end
+end
+
+dynamodb = DynamoDB.client
+
+puts "Please enter the amount of Translate API requests"
+translate_requests_amount = gets.to_i
+
+offset = ((translate_requests_amount - SKIP_TRANSLATE_REQUESTS) / THREADS_AMOUNT) - INACCURACY
+
+run(offset, dynamodb)
+
+#niepomlaskania
+#2730

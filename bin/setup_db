@@ -1,6 +1,6 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
-$LOAD_PATH << File.dirname(__FILE__)
 require "./lib/dynamoDB"
+require "./lib/createTable"
 
-DynamoDB.create_table
+CreateTable.create_table(DynamoDB.client)

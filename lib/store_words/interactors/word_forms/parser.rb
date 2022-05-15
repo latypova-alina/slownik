@@ -1,4 +1,3 @@
-require_relative "../../lib/response_getter"
 require "active_support/core_ext/module"
 require "nokogiri"
 require "open-uri"
@@ -7,12 +6,12 @@ require_relative "constants.rb"
 module WordForms
   class Parser
     include Interactor
-    include ResponseGetter
     include WordForms::Constants
 
     delegate :word_forms_array, :is_verb, :word_forms, to: :context
 
     def call
+      context.fail! if context.word_forms_array.empty?
       context.word_forms = {}
       is_verb ? parse_as_verb : parse_as_noun
     end

@@ -13,7 +13,7 @@ module ResponseGetter
       retry
     else
       File.open("errors.txt", "a") do |file|
-        file.write("#{word}\n")
+        file.write("#{word}, #{Time.now}\n")
       end
     end
   end

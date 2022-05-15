@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
 
-$LOAD_PATH << File.dirname(__FILE__)
 require "./lib/clear_words/clear_words"
 
 ClearWords.run

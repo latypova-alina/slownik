@@ -12,4 +12,6 @@ group :development do
   gem "dotenv"
   gem 'google-cloud-translate-v2', '~> 0.3.0'
   gem "interactor", "~> 3.0"
+  gem "facets", require: false
+  gem "activesupport"
 end
