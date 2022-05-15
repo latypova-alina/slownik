@@ -1,5 +1,4 @@
 # Slownik Crawler
-## _The Last Markdown Editor, Ever_
 
 Slownik crowler is a crowler collecting forms, english translation and gifs for each of the word from polish dictionary taken from https://sjp.pl/.
 
