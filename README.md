@@ -58,6 +58,7 @@ Nouns and adjectives are stored in a structure described below:
   }
 }
 ```
+<img width="1065" alt="Screen Shot 2022-05-16 at 00 17 13" src="https://user-images.githubusercontent.com/10632692/168497225-faed02d5-c0c7-4750-9254-80c56b45d422.png">
 
 Verbs are stored with pronouns and times:
 ```
@@ -126,162 +127,14 @@ Verbs are stored with pronouns and times:
               }
             ]
           },
-          "Czas przyszły": {
-            "L": [
-              {
-                "S": "będziemy chodzili"
-              },
-              {
-                "S": "będziemy chodziły"
-              }
-            ]
-          },
-          "Czas teraźniejszy": {
-            "L": [
-              {
-                "S": "chodzimy"
-              }
-            ]
-          }
-        }
-      },
-      "On/Ona/Ono": {
-        "M": {
-          "Czas przeszły": {
-            "L": [
-              {
-                "S": "chodził"
-              },
-              {
-                "S": "chodziła"
-              },
-              {
-                "S": "chodziło"
-              }
-            ]
-          },
-          "Czas przyszły": {
-            "L": [
-              {
-                "S": "będzie chodził"
-              },
-              {
-                "S": "będzie chodziła"
-              },
-              {
-                "S": "będzie chodziło"
-              }
-            ]
-          },
-          "Czas teraźniejszy": {
-            "L": [
-              {
-                "S": "chodzi"
-              }
-            ]
-          }
-        }
-      },
-      "Oni/One": {
-        "M": {
-          "Czas przeszły": {
-            "L": [
-              {
-                "S": "chodzili"
-              },
-              {
-                "S": "chodziły"
-              }
-            ]
-          },
-          "Czas przyszły": {
-            "L": [
-              {
-                "S": "będą chodzili"
-              },
-              {
-                "S": "będą chodziły"
-              }
-            ]
-          },
-          "Czas teraźniejszy": {
-            "L": [
-              {
-                "S": "chodzą"
-              }
-            ]
-          }
-        }
-      },
-      "Ty": {
-        "M": {
-          "Czas przeszły": {
-            "L": [
-              {
-                "S": "chodziłeś"
-              },
-              {
-                "S": "chodziłaś"
-              }
-            ]
-          },
-          "Czas przyszły": {
-            "L": [
-              {
-                "S": "będziesz chodził"
-              },
-              {
-                "S": "będziesz chodziła"
-              },
-              {
-                "S": "będziesz chodziło"
-              }
-            ]
-          },
-          "Czas teraźniejszy": {
-            "L": [
-              {
-                "S": "chodzisz"
-              }
-            ]
-          }
-        }
-      },
-      "Wy": {
-        "M": {
-          "Czas przeszły": {
-            "L": [
-              {
-                "S": "chodziliście"
-              },
-              {
-                "S": "chodziłyście"
-              }
-            ]
-          },
-          "Czas przyszły": {
-            "L": [
-              {
-                "S": "będziecie chodzili"
-              },
-              {
-                "S": "będziecie chodziły"
-              }
-            ]
-          },
-          "Czas teraźniejszy": {
-            "L": [
-              {
-                "S": "chodzicie"
-              }
-            ]
-          }
-        }
-      }
+          ...
+      ...
     }
   }
 }
 ```
+
+<img width="633" alt="Screen Shot 2022-05-16 at 00 46 51" src="https://user-images.githubusercontent.com/10632692/168497243-d00ee3c0-7c69-4085-a539-1fa4ecf521f4.png">
 
 To run the script do the following:
 1) ```cp .env.test .env```
@@ -293,9 +146,11 @@ To run the script do the following:
     `GIF_API_KEY` is a key taken from Giphy API credentials
 3) Run `bin/setup_db` to create a table in DynamoDB
 4) Run `bin/clear_words` to run the script which removes unneeded words from the dictionary and creates a file `lib/resouces/cleared_words.txt`
-5) Run `bin/store_words`. That will ask you for an initial amount of Translate requests, you can type  in `0` if you don't have any. You can see your amounnt of Translate requests on your Googleapis dasboard. That will help to count a correct offset for the `store_words` script. That's necessary in case the script was interrupted so that you don't rewrite the existing words.
+5) Run `bin/store_words`. That will ask you for an initial amount of Translate requests, you can type  in `0` if you don't have any. You can see your amounnt of Translate requests on your Googleapis dasboard. That will help to count a correct offset for the `store_words` script. That's necessary in case the script was interrupted so that you don't rewrite the existing words. <img width="1133" alt="Screen Shot 2022-05-16 at 00 30 39" src="https://user-images.githubusercontent.com/10632692/168496845-004daf51-c9e9-4f25-9853-6e8b42d45929.png">
+If you know exactly the line the script was interrupted, you can comment [this line](offset_line) and substitude it with `offset = <line_number> / THREADS_AMOUNT`
+
 
 ## Troubleshooting
 In case the `bin/` scripts are not executed, try to make them executable by running `chmod +x bin/setup_db`
 
-
+[v]: <https://github.com/latypova-alina/slownik/blob/master/bin/store_words#L42>
